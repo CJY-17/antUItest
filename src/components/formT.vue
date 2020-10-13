@@ -1,5 +1,16 @@
 <template>
-  <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" @submit="handleSubmit">
+  <a-form :form="form" :label-col="{ span: 6 }" :wrapper-col="{ span: 13 }" @submit="handleSubmit">
+      <a-input-group compact>
+        <!-- <a-input style="width: 20%"   v-decorator="['test', { rules: [{ required: true, message: 'Please input your note!' }] }]" />
+        <a-input style="width: 30%"  v-decorator="['testq', { rules: [{ required: true, message: 'Please input your note!' }] }]" /> -->
+          <a-col>
+            <a-form-item label="name"><a-input v-decorator="['name', { rules: [{ required: true, message: 'Please input your name!' }] }]" /></a-form-item>
+          </a-col>
+          <a-col>
+            <a-form-item label="age"><a-input v-decorator="['age', { rules: [{ required: true, message: 'Please input your age!' }] }]" /></a-form-item>
+          </a-col>
+        
+      </a-input-group>
     <a-form-item label="Note">
       <a-input
         v-decorator="['note', { rules: [{ required: true, message: 'Please input your note!' }] }]"
@@ -22,9 +33,56 @@
         </a-select-option>
       </a-select>
     </a-form-item>
-    <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
+    <a-form-item label="单选">
+      <a-radio-group v-decorator="['radio-group']">
+        <a-radio value="a">
+          item 1
+        </a-radio>
+        <a-radio value="b">
+          item 2
+        </a-radio>
+        <a-radio value="c">
+          item 3
+        </a-radio>
+      </a-radio-group>
+    </a-form-item>
+    <a-form-item label="多选">
+      <a-checkbox-group
+        v-decorator="['checkbox-group', { initialValue: ['A', 'B'] }]"
+        style="width: 100%;"
+      >
+        <a-row>
+          <a-col :span="8">
+            <a-checkbox value="A">
+              A
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox disabled value="B">
+              B
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="C">
+              C
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="D">
+              D
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox value="E">
+              E
+            </a-checkbox>
+          </a-col>
+        </a-row>
+      </a-checkbox-group>
+    </a-form-item>
+    <a-form-item :wrapper-col="{ span: 12, offset: 6 }">
       <a-button type="primary" html-type="submit">
-        Submit
+        确定
       </a-button>
     </a-form-item>
   </a-form>
@@ -42,6 +100,7 @@ export default {
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
+        console.log(values);
         if (!err) {
           console.log('Received values of form: ', values);
         }
@@ -57,29 +116,6 @@ export default {
 };
 </script>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
-</script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
